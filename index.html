@@ -25,7 +25,6 @@
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
 			<div class="container">
-
 				<a class="navbar-brand" href="https://sitepioneers.github.io/portfolio/" aria-label="Main Menu">
 					<img src="https://sitepioneers.github.io/portfolio/assets/img/logo.png" class="logo" alt="April Auger">
 				</a><!-- .navbar-brand -->
@@ -42,8 +41,8 @@
 						<li class="nav-item"><a class="nav-link" href="https://sitepioneers.github.io/portfolio/#portfolio" title="Portfolio">Portfolio</a></li>
 						<li class="nav-item"><a class="nav-link" href="https://sitepioneers.github.io/portfolio/#contact" title="Contact">Contact</a></li>
 					</ul>
-				</div>
-			</div>
+				</div><!-- #main-nav -->
+			</div><!-- .container -->
 		</nav>
 	</header>
 
@@ -51,15 +50,14 @@
 
 		<!-- Jumbotron -->
 		<div class="jumbotron" style="background-image: url(https://sitepioneers.github.io/portfolio/assets/img/laptop.jpg)">
-			<!-- <div class="top-right" style="border-left-width: 1819px; border-top-width: 80px;"></div> -->
 			<div class="container">
 				<div class="jumbotron-content">
 					<div class="signature"><img alt="Signature" src="https://sitepioneers.github.io/portfolio/assets/img/signature.png" /></div>
 					<h1>Web Developer &amp; Graphic Designer</h1>
 					<p><a class="btn btn-primary" href="https://sitepioneers.github.io/portfolio/#portfolio" role="button">View My Work</a></p>
-				</div>
-			</div>
-		</div>
+				</div><!-- .jumbotron-container -->
+			</div><!-- .container -->
+		</div><!-- .jumbotron -->
 
 		<!-- Skills -->
 		<div id="skills" class="container section">
@@ -94,7 +92,7 @@
 					</div>
 				</div>
 			</div><!-- .row -->
-		</div> <!-- .container-fluid -->
+		</div><!-- #skills -->
 
 
 		<!-- About -->
@@ -103,7 +101,7 @@
 				<div class="row equal-height-cols skew-forward">
 					<div class="col-md-6 no-skew">
 						<img class="about-image" src="https://sitepioneers.github.io/portfolio/assets/img/april-auger.jpg" title="April Auger">
-					</div>
+					</div><!-- .col-md-6 -->
 					<div class="col-md-6 skew dark-blue-bkg">
 						<div class="text">
 							<div>
@@ -129,13 +127,10 @@
 								</div>
 							</div>
 						</div><!--text-->
-					</div>
-
-				</div>
-			</div><!--/.row-->
-			<!--/.container-fluid-->
-		</div>
-
+					</div><!-- .col-md-6 -->
+				</div><!-- .row -->
+			</div><!-- .container-fluid -->
+		</div><!-- #about -->
 
 		<!-- Portfolio -->
 		<div id="portfolio" class="container section">
@@ -156,8 +151,8 @@
 								<h3>Bio Site</h3>
 							</div>
 						</a>
-					</div>
-				</div>
+					</div><!-- .card -->
+				</div><!-- .col-md-4 -->
 
 				<div class="col-md-4">
 					<div class="card">
@@ -166,8 +161,8 @@
 							<div class="card-body white">
 								<h3>Bio Site Prototype</h3>
 							</div>
-					</div>
-				</div>
+					</div><!-- .card -->
+				</div><!-- .col-md-4 -->
 
 				<div class="col-md-4">
 					<div class="card">
@@ -177,8 +172,8 @@
 								<h3>Web 231 Repository</h3>
 							</div>
 						</a>
-					</div>
-				</div>
+					</div><!-- .card -->
+				</div><!-- .col-md-4 -->
 			</div><!-- .row -->
 
 			<div class="row">
@@ -190,8 +185,8 @@
 								<h3>Portfolio Prototype</h3>
 							</div>
 						</a>
-					</div>
-				</div>
+					</div><!-- .card -->
+				</div><!-- .col-md-4 -->
 
 				<div class="col-md-4">
 					<div class="card">
@@ -201,11 +196,10 @@
 								<h3>Web 330 Repository</h3>
 							</div>
 						</a>
-					</div>
-				</div>
+					</div><!-- .card -->
+				</div><!-- .col-md-4 -->
 			</div><!-- .row -->
-
-		</div> <!-- .container -->
+		</div> <!-- #portfolio -->
 
 		<!-- Contact -->
 		<div id="contact" class="container-fluid section background-image" style="background-image: url(https://sitepioneers.github.io/portfolio/assets/img/contact.jpg); position:relative">
@@ -217,7 +211,7 @@
 							<h2>Contact</h2>
 							<p>I would love to hear from you!</p>
 							<div><span class="bold">Phone:</span> (916) 544-0625</div>
-							<div><span class="bold">Email:</span> april@sitepioneers.com</div>
+							<p><span class="bold">Email:</span> april@sitepioneers.com</p>
 						</div>
 					</div><!-- .col-md-6 -->
 
@@ -225,11 +219,11 @@
 						<article>
 							<form id="contact-form" method="post" action="https://formspree.io/april@sitepioneers.com">
 								<label for="name">Name</label>
-								<input type="text" id="name" class="form-control" placeholder="Your Full Name" required>
+								<input type="text" id="name" name="name" class="form-control" placeholder="Your Full Name" required>
 								<label for="email">Email</label>
-								<input type="email" id="email" class="form-control" placeholder="name@domain.com">
+								<input type="email" id="email" name="email" class="form-control" placeholder="Your email (name@domain.com)"">
 								<label for="message">Message</label>
-								<input type="textarea" id="message" class="form-control" placeholder="(777) 777-7777">
+								<textarea id="message" name="message" class="form-control" placeholder="Your Message"></textarea>
 								<button type="submit" class="btn btn-primary">Send</button>
 							</form>
 						</article>
