@@ -1,0 +1,351 @@
+body {
+	color: #222
+}
+
+.logo {
+	max-width: 70px;
+}
+
+/* Main styles */
+main.project {
+	margin-top: 55px;
+}
+
+h2 {
+	font-weight: 400
+}
+
+h3 {
+	font-size: 1.25em;
+}
+
+/* Other styles */
+.overlay {
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: #000;
+    opacity: .7;
+    z-index: 500;
+}
+
+.top-angle {
+
+    z-index: 500;
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    border-style: solid solid solid dashed;
+    border-width: 400px 0 0;
+        border-top-width: 400px;
+        border-left-width: 0px;
+    border-color: transparent #fff;
+
+}
+
+/* Jumbotron Styles */
+.jumbotron {
+	position: relative;
+	border-radius: 0;
+	padding-left:0;
+	padding-right:0;
+	padding-top: 7rem;
+	padding-bottom: 4rem;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	margin-bottom: 0;
+}
+
+.jumbotron h1 {
+	font-size: 1.35em
+}
+
+.jumbotron-content {
+	color: #fff;
+	position: relative;
+	z-index: 999;
+	text-align: center;
+}
+
+.signature img {
+	max-width: 350px;
+}
+
+.svg-col {
+	text-align: center
+}
+
+.svg-row .svg {
+    margin: 0 auto;
+    max-width: 200px;
+    max-height: 200px;
+	padding: 2.75em;
+	padding-top: 0;
+}
+
+.svg-row .svg img {
+    height: 100%;
+    max-width: 100%;
+    text-align: center;
+    width: 100%;
+}
+
+.row.equal-height-cols .col-md-6 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row.equal-height-cols .text {
+    padding: 35px 35px;
+}
+
+.dark-blue-bkg {
+	background-color: #1f72d7;
+	color: #fff;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	.jumbotron {
+		padding-top: 10rem;
+		padding-bottom: 7rem;
+	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.jumbotron {
+		padding-top: 13rem;
+		padding-bottom: 8rem;
+	}
+
+	.jumbotron-content {
+		text-align: right;
+	}
+
+	.row.equal-height-cols {
+		overflow: hidden;
+		height:100%
+	}
+
+	.row.equal-height-cols [class*="col-"]{
+		margin-bottom: -99999px;
+		padding-bottom: 99999px;
+	}
+
+	.row.equal-height-cols .col-md-6  {
+		padding-left:0;
+		padding-right:0
+	}
+
+	.skew-forward .col-md-6.skew::before,
+    .skew-backward .col-md-6.skew::before {
+        position: absolute;
+        background-color: #1f72d7;
+        content: "";
+        height: 42em;
+        width: 100%;
+        transform: skewX(-4deg);
+        left: -8%;
+        /* z-index: 0; */
+        max-height: 42em;
+    }
+
+    .skew-backward .col-md-6.skew::before {
+        transform: skewX(4deg);
+        left: -8%;
+    }
+
+    .skew-forward .text,
+    .skew-backward .text {
+        position: absolute;
+        z-index: 1;
+    }
+
+    .skew-backward .col-md-6.no-skew .container {
+        max-width: 585px !important;
+        padding-right: 8%; /*! To account for skew spacing; */
+    }
+
+    .skew-backward .col-md-6.light::before, .skew-backward .col-md-6.light::before {
+        background-color: #1f72d7;
+    }
+}
+
+/* Extra large devices (1200 and up) */
+@media (min-width: 1200px) {
+	.jumbotron {
+		padding-top: 18rem;
+		padding-bottom: 16rem;
+	}
+}
+
+
+/* Section styles */
+.section {
+	padding-bottom: 3em;
+	padding-top: 3em;
+}
+.section-hdr h3 {
+	font-size: 1em;
+	font-weight: 400;
+}
+
+.col-md-12 .section-hdr h2, .col-md-12 .section-hdr h3 {
+	text-align: center
+}
+
+.section-hdr h2::after {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-bottom: 1.5em;
+    margin-top: .25em;
+    max-width: 90px;    top: 60px;
+    width: 50%;
+}
+
+.col-md-12 .section-hdr h2::after {
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+	right: 0;
+}
+
+.section-hdr h2::after {
+    background-color: #000;
+}
+
+.background-image .section-hdr h2::after, .dark-blue-bkg .section-hdr h2::after {
+    background-color: #fff;
+}
+
+#portfolio .card {
+	border: none;
+	box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.09);
+	margin-bottom: 1.5em
+}
+
+#portfolio .card h3 {
+	text-align: center;
+	font-size: 1em;
+	color: #222
+}
+
+.background-image {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	background-attachment: fixed;
+	color: #fff;
+}
+
+.zindex {
+	z-index: 999;
+}
+
+.btn-primary {
+	margin-top: 1em;
+}
+
+label {
+    font-weight: 500;
+}
+
+.form-control {
+	margin-bottom: .75em;
+}
+
+.bg-light {
+    background-color: transparent !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    text-transform: uppercase;
+	letter-spacing: .08em;
+	font-size: .9em;
+	font-weight: 500;
+}
+
+@media (min-width: 992px) {
+	.navbar-light .navbar-nav .nav-link {
+		color: #fff;
+	}
+
+	.navbar-expand-lg .navbar-nav .nav-link {
+		padding-right: 1rem;
+		padding-left: 1rem;
+	}
+}
+
+@media (max-width: 991px) {
+	.navbar {
+		background-color: #fff !important;
+  		box-shadow: 0 4px 8px 0 rgba(138,155,165,0.2);
+	}
+
+	.navbar-light .navbar-nav .nav-link {
+		padding: .35em;
+		color: #000
+	}
+}
+
+.navbar-light .navbar-toggler {
+	border: none;
+}
+
+.navbar-light .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");}
+
+.navbar.scrolled {
+	background-color: #fff !important;
+	transition: background-color 200ms linear;
+    box-shadow: 0 4px 8px 0 rgba(138,155,165,0.2);
+}
+
+.navbar.scrolled .nav-link {
+	color: #000
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+	color: #3d8be9
+}
+
+footer {
+	padding: .5em;
+	background-color: #000;
+	font-size: .7em;
+	font-weight: 500;
+	color: #fff
+}
+
+.bold {
+	font-weight: 500
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+#about .section-hdr h2::after {
+	margin-bottom: .25em
+}
+
+#about .section-description {
+	margin-bottom: 1.75em;
+}
+
+#about img.about-image {
+	object-fit: cover;
+	max-height: 520px;
+	max-width: 100%;
+	min-width: 100%;
+	min-height: 100%;
+}
