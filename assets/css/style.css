@@ -1,12 +1,8 @@
+/* Main styles */
 body {
 	color: #222
 }
 
-.logo {
-	max-width: 70px;
-}
-
-/* Main styles */
 main.project {
 	margin-top: 55px;
 }
@@ -20,6 +16,14 @@ h3 {
 }
 
 /* Other styles */
+.logo {
+	max-width: 70px;
+}
+
+.signature img {
+	max-width: 350px;
+}
+
 .overlay {
     top: 0;
     right: 0;
@@ -32,7 +36,6 @@ h3 {
 }
 
 .top-angle {
-
     z-index: 500;
     width: 0;
     height: 0;
@@ -72,10 +75,7 @@ h3 {
 	text-align: center;
 }
 
-.signature img {
-	max-width: 350px;
-}
-
+/* svg-col Styles */
 .svg-col {
 	text-align: center
 }
@@ -184,7 +184,6 @@ h3 {
 		padding-bottom: 16rem;
 	}
 }
-
 
 /* Section styles */
 .section {
@@ -348,4 +347,8 @@ a:hover {
 	max-width: 100%;
 	min-width: 100%;
 	min-height: 100%;
+}
+
+img {
+	max-width: 100%
 }
