@@ -90,7 +90,7 @@ h4 {
     color: #fff;
     position: relative;
     z-index: 999;
-    text-align: center;
+	text-align: center;
 }
 
 /* svg-col Styles */
@@ -425,4 +425,8 @@ a:hover {
 
 img {
     max-width: 100%
+}
+
+.show {
+	display: block;
 }
