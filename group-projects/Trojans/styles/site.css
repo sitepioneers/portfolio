@@ -1,0 +1,88 @@
+/*
+============================================
+; Title: site.css
+; Authors: Joshua Hughes
+;           April Auger
+;           Kieth Kozma
+; Date:   10 september 2019
+; Description: Javascript trivia custom stylesheet
+;===========================================
+*/
+
+.round-heavy-top {
+    border-radius: .75em .75em 0 0;
+}
+
+.round-heavy-bottom {
+    border-radius: 0 0 .75em .75em;
+}
+
+.round-heavy-right {
+    border-radius: 0 .75em .75em 0;
+}
+
+.round-heavy-left {
+    border-radius: .75em 0 0 .75em;
+}
+
+.round-heavy {
+    border-radius: 1em 1em 1em 1em;
+}
+
+span.empty_fill {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.trivia .bg-secondary {
+    background: #f1f1f1 !important;
+}
+
+.trivia .bg-secondary {
+    background: #f1f1f1 !important;
+}
+
+.main .btn {
+    background-color: #51a6ff;
+    border-color: #51a6ff;
+}
+
+.main .btn:hover {
+    background-color: #1281f4;
+    border-color: #1281f4
+}
+
+.sidebar .btn {
+    background-color: #f1f1f1;
+    border: none;
+    color: #51a6ff;
+}
+
+.sidebar .btn:hover {
+    background-color: #f8f8f8;
+    color: #51a6ff;
+    border: none;
+}
+
+.sidebar .alert-info {
+    color: #004085;
+    background-color: #cce5ff;
+}
+
+h4#question {
+    padding-left: 1em;
+    padding-right: 1em;
+    font-weight: normal;
+}
+
+.btn-wrapper {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.sidebar .btn.btn-success {
+    background-color: #51a6ff;
+    color: #ffffff;
+}

@@ -1,0 +1,581 @@
+<!--
+============================================
+; Title: index
+; Authors: Joshua Hughes
+;           April Auger
+;           Kieth Kozma
+; Date:   22 August 2019
+; Description: Javascript trivia
+;===========================================
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Javascript Trivia</title>
+
+        <!-- Stylesheet - Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="../styles/site.css">
+
+        <!-- JavaScript Libraries -->
+        <script src="../knockout-3.5.0.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+	<body class="trivia container-fluid">
+
+    <!-- Header -->
+    <div class="card-body text-center col-sm-6 offset-sm-3" >
+        <img class="img-fluid"  src="../images/Trojans.png" alt="Trojans">
+        <h1 class="h1">Javascript Trivia</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div id="wrapMain" class="row text-center">
+        <!-- Left Column 25% -->
+        <div class="col-md-3">
+        </div>
+
+        <!-- Center Column 50% -->
+        <div class="col-md-6">
+            <!-- Main content Div -->
+            <div class="well main" id="centerMain">
+                <h3 class="h3 alert-primary p-3 round-heavy-top mb-0">Trivia</h3>
+                <div id="triviaMain" class="well bg-secondary round-heavy-bottom">
+                    <br>
+                    <h3> Question <span data-bind="text: questionCount"></span></h3>
+                    <h4 id="question" class="bg-secondary" data-bind="text: getQuestion"></h4>
+                    <br>
+                    <div class="btn-group btn-group-vertical btn-group-toggle w-50 m-auto" data-toggle="buttons" data-bind='foreach: getAnswers'>
+                            <label class="lblAnser btn btn-info p-0" >
+                              <input type="radio" name="options" autocomplete="off" ><span class="empty_fill p-2" data-bind="text: $data.ansNum +': '+$data.answer, click: function(data) { $parent.GetSelected(data); $parent.SetSelected(); }">
+                            </label><br>
+                        </span>
+                    </div>
+					<br>
+					<div class="btn-wrapper">
+						<button type="button" class="btn btn-primary float-left btnCount" id="btnPrev" data-bind="click: function() { clickNext(-1); setQuestion(); setAnswers(); }, disable: firstQuestion">Previous</button>
+						<button type="button" class="btn btn-primary float-right btnCount" id="btnNext" data-bind="click: function() { clickNext(1); setQuestion(); setAnswers();}, disable: lastQuestion" >Next</button>
+					</div>
+				</div>
+
+                <button id="btnStart" type="button" class="btn btn-secondary btn-lg btn-block round-heavy-bottom" data-bind="click: function() { startClick(); setQuestion(); setAnswers();}">Start Trivia Now</button>
+                </div>
+
+            <button type="button" id="btnSubmitQuiz" class="btn btn-primary">Submit Quiz</button>
+        </div>
+
+        <!-- Right Column 25% -->
+        <div class="col-md-3">
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <!-- Div for questions list -->
+                <div class="well sidebar" id="rightMain">
+                    <h3 class="h3 alert-info round-heavy-top p-3 mb-0">Questions</h3>
+                    <div id="questionsMain" class="well bg-secondary mt-0 round-heavy-bottom w-100 h-100">
+                        <div class="btn-group-vertical w-100" data-toggle="buttons">
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q1" >Question 1</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q2" >Question 2</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q3" >Question 3</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q4" >Question 4</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q5" >Question 5</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q6" >Question 6</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q7" >Question 7</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q8" >Question 8</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q9" >Question 9</button >
+                                <button class="btn btn-secondary w-100 mb-1 " data-bind="click: function(data,event) { goToQuestion(event); getQuestion();setQuestion(); setAnswers() }" id="q10" >Question 10</button >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrapResultsMain" class="row text-center">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="resultsMain" class="well bg-secondary round-heavy-bottom">
+                <br>
+                <h3>Results: <span data-bind="text: CalculateResults()+'\%'" class="h3"></span></h3>
+                <h5>Rank: <span id="spanRank" data-bind="text: ranking() + '\!'" class="h5"></span></h5>
+                <image data-bind="attr:{src: emoji}" class="img-fluid" width="250px"></image><br>
+                <br>
+                <button id="btnShowResults" class="btn btn-primary" data-bind="click: resultsQuestions">Review Questions</button>
+                <br>
+                <br>
+                <div id="divQuestionResults">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</body>
+
+<script>
+
+//Hides game elements on page load
+    $("#btnNext").hide();
+    $("#btnPrev").hide();
+    $("#triviaMain").hide();
+    $("#rightMain").hide();
+    $("#btnSubmitQuiz").hide();//commented for dev
+    // $("#btnStart").hide();//comment in live
+    $("#divQuestionResults").hide();
+
+    $("#resultsMain").hide();
+
+//Jquery functions to make start button more responsive
+$("#btnStart").mouseover(function(){
+    $(this).removeClass("btn-secondary");
+    $(this).addClass("btn-primary");
+});
+$("#btnStart").mouseout(function(){
+    $(this).removeClass("btn-primary");
+    $(this).addClass("btn-secondary");
+});
+
+//jquery to start game.
+$("#btnStart").click(function(){
+    $(this).hide();
+    $("#btnNext").show();
+    $("#btnPrev").show();
+    $("#triviaMain").show();
+    $("#rightMain").show();
+
+    //applies view model for questions
+    ko.applyBindings(new QuestionViewModel(),wrapMain);
+});
+
+//hides everything except the results div when submit is clicked.
+$("#btnSubmitQuiz").click(function(){
+    var confirmSubmit = confirm("Are you sure you want to submit?");
+    if (confirmSubmit){
+        $("#triviaMain").hide();
+        $("#rightMain").hide();
+        $("#resultsMain").show();
+        $("#btnSubmitQuiz").hide()
+        ko.applyBindings(new ResultsViewModel(), wrapResultsMain);
+    }
+    else {
+
+    }
+
+});
+
+//jquery to hide results until button clicked.
+$("#btnShowResults").click(function(){
+    $("#divQuestionResults").show();
+});
+
+//GLOBAL for question and answer storage
+var Finalquestions = Array();
+
+var arrCorrectQuestions =[
+    {q: '0', a: "C"},//question 1 correct
+    {q: '1', a: "C"},//question 2 correct
+    {q: '2', a: "B"},//question 3 correct
+    {q: '3', a: "C"},//question 4 correct
+    {q: '4', a: "A"},//question 5 correct
+    {q: '5', a: "B"},//question 6 correct
+    {q: '6', a: "C"},//question 7 correct
+    {q: '7', a: "B"},//question 8 correct
+    {q: '8', a: "D"},//question 9 correct
+    {q: '9', a: "B"}//question 10 correct
+];
+
+var RESULTS_CLICKED = false;
+
+//view model creation for the questions
+var QuestionViewModel = function(){
+    //counter declare
+    this.questionCount = ko.observable(0);
+    // //runs on click of start
+    // this.startClick = function(){
+    //     this.questionCount(1);
+    // }
+
+    //changes question forward or backward
+    this.clickNext = function(val) {
+        this.questionCount(this.questionCount() + parseInt(val));
+        //if next is clicked AND all questions answered, show submit button
+        if ((this.questionCount()==10)&&(Finalquestions.length==10)) {
+            $("#btnSubmitQuiz").show();
+        }
+    }
+
+    //prevents previous from being clicked on the first question
+    this.firstQuestion = ko.pureComputed(function() {
+        return this.questionCount() <= 1;
+    }, this);
+
+    //prevents next from being click on question 10
+    this.lastQuestion = ko.pureComputed(function() {
+        return this.questionCount() >= 10;
+    }, this);
+
+    //array of the questions and answers
+    this.questionsArray = ko.observableArray([
+        //question 1
+        {
+            question: ko.observable("Which function lets you register a function to be invoked repeatedly after a certain time?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "setTimeout()"},
+                { ansNum: "B", answer: "setTotaltime()"},
+                { ansNum: "C", answer: "setInterval()"},
+                { ansNum: "D", answer: "settime()"}
+            ])
+        },
+        //question 2
+        {
+            question: ko.observable("Which are the events that have default actions that can be canceled by event handlers?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "Reset and form-related events"},
+                { ansNum: "B", answer: "Submit and form-related events"},
+                { ansNum: "C", answer: "Submit and reset events"},
+                { ansNum: "D", answer: "Form-related events"}
+            ])
+        },
+        //question 3
+        {
+            question: ko.observable("What is the keyword you use to refer to an object through which it was invoked?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "from"},
+                { ansNum: "B", answer: "this"},
+                { ansNum: "C", answer: "variable"},
+                { ansNum: "D", answer: "object"}
+            ])
+        },
+        //question 4
+        {
+            question: ko.observable("Which attribute is used to specify that the script is executed when the page has finished parsing?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "parse"},
+                { ansNum: "B", answer: "sync"},
+                { ansNum: "C", answer: "defer"},
+                { ansNum: "D", answer: "type"}
+            ])
+        },
+        //question 5
+        {
+            question: ko.observable("A scripting language is a"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "High level programming language"},
+                { ansNum: "B", answer: "Assembly level programming language"},
+                { ansNum: "C", answer: "Machine level programming language"},
+                { ansNum: "D", answer: "Low level programming language"}
+            ])
+        },
+        //question 6
+        {
+            question: ko.observable("The properties() method is a"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "Enumerable method"},
+                { ansNum: "B", answer: "Non-enumerable method"},
+                { ansNum: "C", answer: "Operational method"},
+                { ansNum: "D", answer: "Calling method"}
+            ])
+        },
+        //question 7
+        {
+            question: ko.observable("What is the opposite approach to the lexical scoping?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "Literal scoping"},
+                { ansNum: "B", answer: "Static scoping"},
+                { ansNum: "C", answer: "Dynamic scoping"},
+                { ansNum: "D", answer: "Generic scoping"}
+            ])
+        },
+        //question 8
+        {
+            question: ko.observable("What will happen if a return statement does not have an associated expression?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "It returns the value 0"},
+                { ansNum: "B", answer: "It returns the undefined value"},
+                { ansNum: "C", answer: "It will throw an exception"},
+                { ansNum: "D", answer: "It will throw an error"}
+            ])
+        },
+        //question 9
+        {
+            question: ko.observable("The function stops its execution when it encounters?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "continue statement"},
+                { ansNum: "B", answer: "break statement"},
+                { ansNum: "C", answer: "goto statement"},
+                { ansNum: "D", answer: "return statement"}
+            ])
+        },
+        //question 10
+        {
+            question: ko.observable("What kind of scoping does JavaScript use?"),
+            answers : ko.observableArray([
+                { ansNum: "A", answer: "Literal"},
+                { ansNum: "B", answer: "Lexical"},
+                { ansNum: "C", answer: "Segmental"},
+                { ansNum: "D", answer: "Sequential"}
+            ])
+        }
+    ]);
+
+    //sets question text
+    this.getQuestion = ko.observable("");
+    this.setQuestion = function(){
+        this.getQuestion(this.questionsArray()[this.questionCount()-1].question());
+    }
+
+    //sets answer text
+    this.getAnswers = ko.observableArray("");
+    this.setAnswers = function(){
+        //answers array created and assigned using the getter.
+        this.getAnswers(this.questionsArray()[this.questionCount()-1].answers());//good
+
+        // block is to determine if question is already in array, and if so
+        // will add the active class of the item in the answer array
+        //function to return true if question already in array(good)
+        function qExists(ques) {
+            var arr = Finalquestions;
+            return arr.some(function(el) {
+                return el.q == ques;
+            });
+        }
+
+        //switch returns answer letter (good)
+        if (qExists(this.questionCount())) {
+            //generic search function
+            function search(nameKey, prop, myArray){
+                for (var i=0; i < myArray.length; i++) {
+                    if (myArray[i]['q']=== nameKey) {
+                        return myArray[i][prop];
+                    }
+                }
+            }
+            //uses search function to return a value of current question(good)
+            var existAnswer = search(this.questionCount(),"a", Finalquestions);
+            var ansVal = "";
+            switch (existAnswer) {
+                case 'A':
+                    ansVal = 0;
+                    break;
+                case 'B':
+                    ansVal = 1;
+                    break;
+                case 'C':
+                    ansVal = 2;
+                    break;
+                case 'D':
+                    ansVal = 3;
+                    break;
+            }
+
+            //changes class to selected of the answer already in the array
+            $('.lblAnser:eq('+ansVal+')').addClass('active');
+
+        }//end if q exists
+
+    }//end set answers
+
+    //set selected question
+    this.SetSelected = function(){
+        var qid = "#q" + this.questionCount();
+        $(qid).addClass('btn-success');
+
+    }
+
+    //get selected answer
+    this.GetSelected = function(val){
+
+        var correctAnsVal = "";
+        var corAnswer = arrCorrectQuestions[this.questionCount()-1].a;
+            switch (corAnswer) {
+                case 'A':
+                    correctAnsVal = 0;
+                    break;
+                case 'B':
+                    correctAnsVal = 1;
+                    break;
+                case 'C':
+                    correctAnsVal = 2;
+                    break;
+                case 'D':
+                    correctAnsVal = 3;
+                    break;
+            }
+
+        //sets temp object for adding to final question array
+        var elem = {
+            q: this.questionCount(),
+            qVal: this.questionsArray()[this.questionCount()-1].question(),
+            a: val.ansNum,
+            aVal: val.answer,
+            corr_a: this.questionsArray()[this.questionCount()-1].answers()[correctAnsVal].answer
+        };
+
+        //function checks to see if question already exists in final questions array
+        function qExists(ques) {
+            var arr = Finalquestions;
+            return arr.some(function(el) {
+                return el.q == ques;
+            });
+        }
+
+        //if question already exists, then update answer, else push to questions array
+        if (qExists(elem.q)) {
+            //updates answer if changed in global
+            function update(nameKey, prop, myArray){
+                for (var i=0; i < myArray.length; i++) {
+                    if (myArray[i]['q']=== nameKey) {
+                        myArray[i]['a'] = elem.a ;
+                    }
+                }
+            }
+            //updates answer function.
+            update(this.questionCount(),"a", Finalquestions);
+
+        }
+        else{
+            //adds question and answer to the final questions array global once answered
+            Finalquestions.push(elem);
+            //shows submit button if all questions answered************
+            if (Finalquestions.length==10) {
+                $("#btnSubmitQuiz").show();
+            }
+        }
+
+        //console log finalquestions array(output for debugging)
+        Finalquestions.sort((x,y) => (x.q > y.q) ? 1: -1);//sorts question array numerically by question number
+        Finalquestions.forEach(element => {
+            console.log(element);
+        });
+    }
+
+    //handles go directly to question from question pane on right
+    this.goToQuestion = function(event){
+        var qid = event.target.id;
+        var countRevert = qid.replace( /^\D+/g, '');
+        this.questionCount(parseInt(countRevert));
+    }
+    //set defaults for first question.
+    this.questionCount(1);
+    this.setQuestion();
+    this.setAnswers();
+};
+
+//view model for the results.
+var ResultsViewModel = function(){
+
+    arrCorrectQuestions.sort((x,y) => (x.q > y.q) ? 1: -1);//sorts correct question array numerically by question number
+    Finalquestions.sort((x,y) => (x.q > y.q) ? 1: -1);//sorts question array numerically by question number
+
+    //function to calculate the results of the quiz
+    this.CalculateResults = ko.pureComputed(function(){
+        var percentage = 0;
+        var right = 0;
+        //loops throught the final questions array, and compares it to the correct answers array, and adds 1
+        // to the right variable to get the correct percentage
+        for (let i = 0; i < Finalquestions.length; i++) {
+            let qElem = Finalquestions[i];
+            let cElem = arrCorrectQuestions[i];
+            if (qElem.a != cElem.a) {
+                right = right;
+            }
+            else {
+                right +=  1;
+            }
+
+        };
+
+        percentage = (right / 10)*100;//change back to 10
+
+        return Math.round(percentage);
+    }, this);
+
+    //assigns and determines ranking
+    this.ranking = ko.pureComputed(function(){
+        var score = this.CalculateResults();
+        var rank = "";
+        switch (true) {
+            case (score >= 80):
+                rank = "Expert";
+                $("#spanRank").addClass('btn-success');
+                break;
+            case ((score < 80)&&(score >=60 )):
+                rank = "Novice";
+                $("#spanRank").addClass('btn-warning');
+                break;
+            case (score < 60):
+                rank = "Beginner";
+                $("#spanRank").addClass('btn-danger');
+                break;
+
+            default:
+                break;
+        }
+        return rank;
+    },this);
+
+    //adds image based on rank
+    this.emoji = ko.pureComputed(function(){
+        var src = "";
+        switch (this.ranking()) {
+            case "Expert":
+                src="../images/happy-emoticon.png";
+                break;
+            case "Novice":
+                src="../images/nuetral-emoticon.png";
+                break;
+            case "Beginner":
+                src="../images/sad-emoticon.png";
+                break;
+        }
+        return src;
+    },this);
+
+    //shows questions results
+    this.resultsQuestions = function(){
+        if (!RESULTS_CLICKED) {
+
+            for (let i = 0; i < Finalquestions.length; i++) {
+                let qElem = Finalquestions[i];
+                let cElem = arrCorrectQuestions[i];
+                
+
+                //shows correct answer and wrong answer if answer wrong, shows right,
+                //applies colorful bootstrap styling as well
+                if (qElem.a != cElem.a) {
+
+                    $("#divQuestionResults").append(
+                        "<div class='alert-light w-75 m-auto'>"+
+                            "<h6 class='h6 text-danger bg-light'>Question "+qElem.q +"</h6>"+
+                            "<p class='text-center'>"+qElem.qVal +"</p><hr>"+
+                            "<p>"+
+                                "<span class='alert-danger'><b>Your Answer: </span>"+qElem.a+"</b>: "+qElem.aVal+"<br>"+
+                                "<span class='alert-success'><b>Correct Answer: </span>"+cElem.a+"</b>: "+qElem.corr_a+"</p>"+
+                        "<hr></div>"
+                    );
+                }
+                else {
+                    $("#divQuestionResults").append(
+                        "<div class='alert-light w-75 m-auto'>"+
+                            "<h6 class='h6 text-success bg-light'>Question "+qElem.q +"</h6>"+
+                            "<p class='text-center'>"+qElem.qVal +"</p><hr>"+
+                            "<p>"+
+                                "<span class='alert-success'><b>Correct Answer: </span>"+qElem.a+"</b>: "+qElem.aVal+"</p>"+
+                        "<hr></div>"
+                    );
+                }
+
+            };
+            $("#divQuestionResults").append("<br>");
+            RESULTS_CLICKED =true;
+        }
+    };
+
+};
+
+</script>
+</html>
