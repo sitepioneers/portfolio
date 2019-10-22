@@ -384,7 +384,7 @@ label {
 }
 
 .navbar.scrolled .nav-link {
-    color: #000
+    color: #000 !important;
 }
 
 .navbar-light .navbar-nav .nav-link:focus,
@@ -435,4 +435,13 @@ img {
 .carousel-inner img {
     height: 500px;
     width: auto;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+
+body.page {
+	margin-top: 100px;
 }
