@@ -334,7 +334,7 @@ label {
     margin-bottom: .75em;
 }
 
-.bg-light {
+.bg-light.home {
     background-color: transparent !important;
 }
 
