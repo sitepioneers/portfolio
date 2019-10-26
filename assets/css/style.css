@@ -158,9 +158,6 @@ h4 {
         padding-bottom: 7rem;
     }
 
-    .bg-light.home {
-        background-color: transparent !important;
-    }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -366,6 +363,10 @@ label {
     .navbar .navbar-nav .nav-link {
         padding: .35em;
         color: #000
+    }
+
+    .bg-light.home {
+        background-color: transparent !important;
     }
 }
 
