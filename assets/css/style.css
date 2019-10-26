@@ -157,7 +157,6 @@ h4 {
         padding-top: 10rem;
         padding-bottom: 7rem;
     }
-
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -219,6 +218,10 @@ h4 {
         max-width: 585px !important;
         padding-right: 8%;
         /* For skew spacing */
+    }
+
+    .bg-light.home {
+        background-color: transparent !important;
     }
 }
 
@@ -363,10 +366,6 @@ label {
     .navbar .navbar-nav .nav-link {
         padding: .35em;
         color: #000
-    }
-
-    .bg-light.home {
-        background-color: transparent !important;
     }
 }
 
